@@ -1,7 +1,9 @@
 package klauer.ssh.common;
 
 import com.jcraft.jsch.UserInfo;
-
+import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
 
 /**
  * My User Information.
@@ -10,11 +12,22 @@ import com.jcraft.jsch.UserInfo;
  */
 public class NickUserInfo implements UserInfo {
 
-	public static String private_key_file = "/Users/klauer/.ssh/id_dsa";
-	public static String known_hosts_file = "/Users/klauer/.ssh/known_hosts";
-	public static String username = "klauer";
-	public static String host = "klauern.ath.cx";
-	
+	public static String private_key_file;
+	public static String known_hosts_file;
+	public static String username;
+	public static String host;
+	public static Properties auth_props;
+	public static URL url;
+
+	public NickUserInfo() throws IOException {
+		url = NickUserInfo.class.getResource("src/main/resources/auth_props.properties");
+		auth_props.load(url.openStream());
+		private_key_file = auth_props.getProperty("ssh.auth.private.key");
+		known_hosts_file = auth_props.getProperty("ssh.auth.known.hosts");
+		username = auth_props.getProperty("ssh.auth.username");
+		host = auth_props.getProperty("ssh.auth.host");
+	}
+
 	public String getPassphrase() {
 		// TODO Auto-generated method stub
 		return null;
@@ -43,6 +56,4 @@ public class NickUserInfo implements UserInfo {
 	public void showMessage(String message) {
 		System.out.println(message);
 	}
-
-	
 }
