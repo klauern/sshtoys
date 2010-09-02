@@ -16,16 +16,19 @@ public class NickUserInfo implements UserInfo {
 	public static String known_hosts_file;
 	public static String username;
 	public static String host;
+	public static String script_to_load;
 	public static Properties auth_props;
 	public static URL url;
 
 	public NickUserInfo() throws IOException {
-		url = NickUserInfo.class.getResource("src/main/resources/auth_props.properties");
+		url = this.getClass().getResource("/auth_props.properties");
+		auth_props = new Properties();
 		auth_props.load(url.openStream());
 		private_key_file = auth_props.getProperty("ssh.auth.private.key");
 		known_hosts_file = auth_props.getProperty("ssh.auth.known.hosts");
 		username = auth_props.getProperty("ssh.auth.username");
 		host = auth_props.getProperty("ssh.auth.host");
+		script_to_load = auth_props.getProperty("ssh.auth.script.to.load");
 	}
 
 	public String getPassphrase() {

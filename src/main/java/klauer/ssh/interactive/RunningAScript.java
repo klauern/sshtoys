@@ -32,7 +32,7 @@ public class RunningAScript {
 
 			InputStream in = channel.getInputStream();
 
-			File scriptfile = new File("/Users/klauer/Programming/Java/sshtoys/script.sh");
+			File scriptfile = new File(nui.script_to_load);
 			FileInputStream fis = new FileInputStream(scriptfile);
 
 			byte[] commandbytes = new byte[(int) scriptfile.length()];
