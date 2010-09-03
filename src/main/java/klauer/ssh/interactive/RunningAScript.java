@@ -1,5 +1,6 @@
 package klauer.ssh.interactive;
 
+import com.google.common.io.Files;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -29,21 +30,10 @@ public class RunningAScript {
 			session.connect();
 			ChannelExec channel = (ChannelExec) session.openChannel(ChannelTypes.EXEC.toString());
 
-
 			InputStream in = channel.getInputStream();
 
-			File scriptfile = new File(nui.script_to_load);
-			FileInputStream fis = new FileInputStream(scriptfile);
 
-			byte[] commandbytes = new byte[(int) scriptfile.length()];
-			// Read in the bytes
-			int offset = 0;
-			int numRead = 0;
-			while (offset < commandbytes.length && (numRead = fis.read(commandbytes, offset, commandbytes.length - offset)) >= 0) {
-				offset += numRead;
-			}
-
-			channel.setCommand(commandbytes);
+			channel.setCommand(Files.toByteArray(new File(nui.script_to_load)));
 			channel.setErrStream(System.out);
 
 			channel.connect();
