@@ -4,8 +4,8 @@ import com.google.common.io.Files;
 import java.io.IOException;
 import java.io.InputStream;
 
-import klauer.ssh.common.ChannelTypes;
-import klauer.ssh.common.NickUserInfo;
+import klauer.ssh.common.ChannelType;
+import klauer.ssh.common.AuthSettingsFromSource;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
@@ -21,14 +21,14 @@ public class RunningAScript {
 
 		try {
 			JSch jsch = new JSch();
-			NickUserInfo nui = new NickUserInfo();
+			AuthSettingsFromSource nui = new AuthSettingsFromSource();
 			jsch.addIdentity(nui.private_key_file);
 			jsch.setKnownHosts(nui.known_hosts_file);
 
 			Session session = jsch.getSession(nui.username,
 							nui.host);
 			session.connect();
-			ChannelExec channel = (ChannelExec) session.openChannel(ChannelTypes.EXEC.toString());
+			ChannelExec channel = (ChannelExec) session.openChannel(ChannelType.EXEC.toString());
 
 			InputStream in = channel.getInputStream();
 

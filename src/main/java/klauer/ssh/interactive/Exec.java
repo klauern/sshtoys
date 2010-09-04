@@ -8,7 +8,7 @@ import com.jcraft.jsch.*;
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
-import klauer.ssh.common.NickUserInfo;
+import klauer.ssh.common.AuthSettingsFromSource;
 
 public class Exec {
 
@@ -16,8 +16,8 @@ public class Exec {
 		try {
 			JSch jsch = new JSch();
 
-			jsch.addIdentity(NickUserInfo.private_key_file);
-			jsch.setKnownHosts(NickUserInfo.known_hosts_file);
+			jsch.addIdentity(AuthSettingsFromSource.private_key_file);
+			jsch.setKnownHosts(AuthSettingsFromSource.known_hosts_file);
 
 
 			String host = null;
