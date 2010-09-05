@@ -3,7 +3,7 @@ package klauer.ssh.common;
 import com.jcraft.jsch.UserInfo;
 
 /**
- * The most restrictive, useless {@link UserInfo} you can possibly have and still
+ * The most restrictive, useless {@link com.jcraft.jsch.UserInfo} you can possibly have and still
  * work (maybe).
  * 
  * @author Nick Klauer <klauer@gmail.com>

@@ -17,4 +17,5 @@ public class AuthSettingsTests {
 		assertEquals(AuthSettingsFromSource.getInstance().host, "klauern.ath.cx");
 		assertEquals(settings.host, "klauern.ath.cx");
 	}
+	
 }
