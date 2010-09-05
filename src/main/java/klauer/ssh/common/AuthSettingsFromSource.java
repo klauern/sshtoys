@@ -22,7 +22,7 @@ import java.util.Properties;
  * </ol>
  * @author Nick Klauer <klauer@gmail.com>
  */
-public class AuthSettingsFromSource {
+public class AuthSettingsFromSource implements AuthEngine {
 
 	public static String private_key_file;
 	public static String known_hosts_file;
@@ -50,4 +50,13 @@ public class AuthSettingsFromSource {
 		return settings;
 	}
 
+
+	/**
+	 * 
+	 * @return the simplest UserInfo necessary for this context.
+	 */
+	@Override
+	public UserInfo getUserInfo() {
+		return new EmptyUserInfo();
+	}
 }
