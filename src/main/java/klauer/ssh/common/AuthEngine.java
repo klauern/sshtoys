@@ -1,6 +1,7 @@
 package klauer.ssh.common;
 
 import com.jcraft.jsch.UserInfo;
+import java.io.File;
 
 /**
  * Class to contain authorization details
@@ -17,6 +18,9 @@ public interface AuthEngine {
 	 */
 	public UserInfo getUserInfo();
 
-	
+	public String getUsername();
+	public String getHost();
+	public File getKnownHosts();
+	public File getPrivateKey();
 
 }

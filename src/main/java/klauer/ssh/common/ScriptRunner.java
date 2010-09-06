@@ -26,8 +26,8 @@ public class ScriptRunner {
 
 		try {
 			settings = AuthSettingsFromSource.getInstance();
-			runScript(settings.host, settings.username, new File(settings.private_key_file),
-							new File(settings.known_hosts_file), new File(settings.script_to_load));
+			runScript(settings.host, settings.username, settings.private_key_file,
+							settings.known_hosts_file, new File(settings.script_to_load));
 
 		} catch (IOException ex) {
 			return false;

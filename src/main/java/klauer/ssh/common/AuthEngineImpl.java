@@ -13,12 +13,12 @@ import java.io.File;
  */
 public class AuthEngineImpl implements AuthEngine {
 
-	public final String user;
-	public final String host;
-	public final File private_key;
-	public final File known_hosts;
-	public final String password;
-	public final String key_passphrase;
+	private final String user;
+	private final String host;
+	private final File private_key;
+	private final File known_hosts;
+	private final String password;
+	private final String key_passphrase;
 	private final UserInfo user_info;
 
 	public AuthEngineImpl(String user, String host, File private_key, File known_hosts, final String password, final String key_passphrase) {
@@ -77,5 +77,25 @@ public class AuthEngineImpl implements AuthEngine {
 	@Override
 	public UserInfo getUserInfo() {
 		return user_info;
+	}
+
+	@Override
+	public String getUsername() {
+		return user;
+	}
+
+	@Override
+	public String getHost() {
+		return host;
+	}
+
+	@Override
+	public File getKnownHosts() {
+		return known_hosts;
+	}
+
+	@Override
+	public File getPrivateKey() {
+		return private_key;
 	}
 }

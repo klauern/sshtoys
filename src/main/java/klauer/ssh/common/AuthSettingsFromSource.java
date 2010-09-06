@@ -1,6 +1,7 @@
 package klauer.ssh.common;
 
 import com.jcraft.jsch.UserInfo;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
@@ -24,32 +25,32 @@ import java.util.Properties;
  */
 public class AuthSettingsFromSource implements AuthEngine {
 
-	public static String private_key_file;
-	public static String known_hosts_file;
-	public static String username;
-	public static String host;
-	public static Properties auth_props;
-	public static String script_to_load;
-	public static URL url;
-
+	public  final File private_key_file;
+	public  final File known_hosts_file;
+	public  final String username;
+	public  final String host;
+	public  final Properties auth_props;
+	public  final String script_to_load;
+	public  final URL url;
 	protected static AuthSettingsFromSource settings;
 
 	private AuthSettingsFromSource() throws IOException {
 		url = this.getClass().getResource("/auth_props.properties");
 		auth_props = new Properties();
 		auth_props.load(url.openStream());
-		private_key_file = auth_props.getProperty("ssh.auth.private.key");
-		known_hosts_file = auth_props.getProperty("ssh.auth.known.hosts");
+		private_key_file = new File(auth_props.getProperty("ssh.auth.private.key"));
+		known_hosts_file = new File(auth_props.getProperty("ssh.auth.known.hosts"));
 		username = auth_props.getProperty("ssh.auth.username");
 		host = auth_props.getProperty("ssh.auth.host");
 		script_to_load = auth_props.getProperty("ssh.auth.script.to.load");
 	}
 
 	public static AuthSettingsFromSource getInstance() throws IOException {
-		if (settings == null) { return new AuthSettingsFromSource(); }
+		if (settings == null) {
+			return new AuthSettingsFromSource();
+		}
 		return settings;
 	}
-
 
 	/**
 	 * 
@@ -58,5 +59,25 @@ public class AuthSettingsFromSource implements AuthEngine {
 	@Override
 	public UserInfo getUserInfo() {
 		return new EmptyUserInfo();
+	}
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public String getHost() {
+		return host;
+	}
+
+	@Override
+	public File getKnownHosts() {
+		return known_hosts_file;
+	}
+
+	@Override
+	public File getPrivateKey() {
+		return private_key_file;
 	}
 }
