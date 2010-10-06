@@ -21,6 +21,16 @@ public class AuthEngineImpl implements AuthEngine {
 	private final String key_passphrase;
 	private final UserInfo user_info;
 
+	/**
+	 * Full configuration for a new SSH connection.  All other constructors pass through
+	 * this one, setting {@code null} values for customized connection settings.
+	 * @param user
+	 * @param host
+	 * @param private_key
+	 * @param known_hosts
+	 * @param password
+	 * @param key_passphrase
+	 */
 	public AuthEngineImpl(String user, String host, File private_key, File known_hosts, final String password, final String key_passphrase) {
 		this.user = user;
 		this.host = host;
@@ -74,6 +84,14 @@ public class AuthEngineImpl implements AuthEngine {
 		this(user, host, private_key, known_hosts, null, key_passphrase);
 	}
 
+	/**
+	 * For use with interactive terminals which may request information to authenticate
+	 * as well as ask permission to read your known_hosts file.  This is required
+	 * for JSch, and many default configurations are provided to automate any
+	 * requirement to implement this yourself.
+	 * @return A UserInfo for {@link com.jcraft.jsch.JSch} to make connections via
+	 * SSH
+	 */
 	@Override
 	public UserInfo getUserInfo() {
 		return user_info;

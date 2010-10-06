@@ -1,5 +1,6 @@
 package klauer.ssh.common;
 
+import com.jcraft.jsch.JSch;
 import java.io.File;
 
 /**
@@ -9,6 +10,7 @@ import java.io.File;
 public class SSHConnectionFactory {
 
 	AuthEngine authentication_details;
+	JSch jsch_session;
 
 	public SSHConnectionFactory() {
 	}

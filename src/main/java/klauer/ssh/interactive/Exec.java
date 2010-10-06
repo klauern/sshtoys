@@ -16,8 +16,10 @@ public class Exec {
 		try {
 			JSch jsch = new JSch();
 
-			jsch.addIdentity(AuthSettingsFromSource.private_key_file);
-			jsch.setKnownHosts(AuthSettingsFromSource.known_hosts_file);
+			AuthSettingsFromSource source = AuthSettingsFromSource.getInstance();
+
+			jsch.addIdentity(source.private_key_file.getAbsolutePath());
+			jsch.setKnownHosts(source.known_hosts_file.getAbsolutePath());
 
 
 			String host = null;
@@ -33,17 +35,6 @@ public class Exec {
 
 			Session session = jsch.getSession(user, host, 22);
 
-			/*
-			String xhost="127.0.0.1";
-			int xport=0;
-			String display=JOptionPane.showInputDialog("Enter display name",
-			xhost+":"+xport);
-			xhost=display.substring(0, display.indexOf(':'));
-			xport=Integer.parseInt(display.substring(display.indexOf(':')+1));
-			session.setX11Host(xhost);
-			session.setX11Port(xport+6000);
-			 */
-
 			// username and password will be given via UserInfo interface.
 			UserInfo ui = new MyUserInfo();
 			session.setUserInfo(ui);
@@ -55,16 +46,8 @@ public class Exec {
 			Channel channel = session.openChannel("exec");
 			((ChannelExec) channel).setCommand(command);
 
-			// X Forwarding
-			// channel.setXForwarding(true);
-
-			//channel.setInputStream(System.in);
 			channel.setInputStream(null);
 
-			//channel.setOutputStream(System.out);
-
-			//FileOutputStream fos=new FileOutputStream("/tmp/stderr");
-			//((ChannelExec)channel).setErrStream(fos);
 			((ChannelExec) channel).setErrStream(System.err);
 
 			InputStream in = channel.getInputStream();
