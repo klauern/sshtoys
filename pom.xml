@@ -23,7 +23,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>r06</version>
+      <version>23.0</version>
     </dependency>
 <!--    <dependency>
       <groupId>org.mockito</groupId>
