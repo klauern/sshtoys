@@ -11,13 +11,13 @@
     <dependency>
       <groupId>com.jcraft</groupId>
       <artifactId>jsch</artifactId>
-      <version>0.1.42</version>
+      <version>0.1.55</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.jcraft</groupId>
       <artifactId>jsch</artifactId>
-      <version>0.1.42</version>
+      <version>0.1.55</version>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
